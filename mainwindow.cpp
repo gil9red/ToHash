@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include "about.h"
+#include <QSettings>
 
 namespace TypeAlgorithm
 {
@@ -65,6 +66,14 @@ MainWindow::MainWindow(QWidget * parent) :
         QObject::connect( ui->algorithm, SIGNAL(currentIndexChanged(int)), conversionWithDelay, SLOT(start()) );
         QObject::connect( ui->numerationSystem, SIGNAL(currentIndexChanged(int)), conversionWithDelay, SLOT(start()) );
     }
+
+
+    QSettings ini( "settings.ini", QSettings::IniFormat );
+    ini.beginGroup( "MainWindow" );
+    restoreGeometry( ini.value( "Geometry" ).toByteArray() );
+    restoreState( ini.value( "State" ).toByteArray() );
+    ui->splitter->restoreState( ini.value( "Splitter" ).toByteArray() );
+    ini.endGroup();
 }
 MainWindow::~MainWindow()
 {
@@ -164,10 +173,20 @@ void MainWindow::on_actionFromFile_triggered()
 }
 void MainWindow::on_actionQuit_triggered()
 {
-    qApp->quit();
+    close();
 }
 void MainWindow::on_actionAbout_triggered()
 {
     About * about = new About();
     about->exec();
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    QSettings ini( "settings.ini", QSettings::IniFormat );
+    ini.beginGroup( "MainWindow" );
+    ini.setValue( "Geometry", saveGeometry() );
+    ini.setValue( "State", saveState() );
+    ini.setValue( "Splitter", ui->splitter->saveState() );
+    ini.endGroup();
 }
