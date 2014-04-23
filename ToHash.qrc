@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/fugue-icons">
+        <file alias="blue-document-word-text">icons/blue-document-word-text.png</file>
+        <file alias="clipboard-text">icons/clipboard-text.png</file>
+        <file alias="door-open">icons/door-open.png</file>
+        <file alias="question-balloon">icons/question-balloon.png</file>
+    </qresource>
+</RCC>
