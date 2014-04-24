@@ -14,10 +14,17 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
         crc32.h \
-    about.h
+    about.h \
+    appinfo.h
 
 FORMS    += mainwindow.ui \
     about.ui
 
 RESOURCES += \
     ToHash.qrc
+
+win32:
+{
+    RC_FILE = app.rc
+    OTHER_FILES += app.rc
+}

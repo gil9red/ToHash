@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTextCodec>
+#include "appinfo.h"
 
 QString getWindowTitle()
 {
@@ -14,8 +15,8 @@ QString getWindowTitle()
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setApplicationName( "ToHash" );
-    app.setApplicationVersion( "0.0.1" );
+    app.setApplicationName( App::name );
+    app.setApplicationVersion( App::version );
 
     QTextCodec::setCodecForCStrings( QTextCodec::codecForName( "utf8" ) );
 
